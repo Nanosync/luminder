@@ -18,8 +18,9 @@ router.route('/add').post((req, res) => {
   const matches = req.body.matches;
   const likes = req.body.likes;
   const dislikes = req.body.dislikes;
+  const profilePhoto = req.body.profilePhoto;
 
-  const newUser = new User({name, uid, gender, bio, photos, modules, chats, matches, likes, dislikes});
+  const newUser = new User({name, uid, gender, bio, photos, modules, chats, matches, likes, dislikes, profilePhoto});
 
   newUser.save()
     .then(() => res.json('User added!'))
@@ -51,6 +52,7 @@ router.route('/update/:id').post((req, res) => {
       user.matches = req.body.matches;
       user.likes = req.body.likes;
       user.dislikes = req.body.dislikes;
+      user.profilePhoto = req.body.profilePhoto;
 
       user.save()
         .then(() => res.json('User updated!'))

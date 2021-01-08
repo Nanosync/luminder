@@ -18,6 +18,9 @@ const userSchema = new Schema(
     bio: {
       type: String,
     },
+    profilePhoto: {
+      type: String,
+    },
     photos: [String],
     modules: [String],
     chats: [String],
