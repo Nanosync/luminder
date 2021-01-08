@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   dislikes: [],
   profilePhoto: "",
   uid: "",
+  age: 0,
 
   error: null,
   fetchedData: false,
