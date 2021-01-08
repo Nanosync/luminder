@@ -17,11 +17,7 @@ const ProfileImageCard = () => {
             <Card>
                 <Card.Img variant="top" src={UserPhoto3} width="200px" height="200px" style={{ objectFit: "cover" }} />
             </Card>
-            <Card className="align-self-center">
-                <Button variant="primary">Add More Photos</Button>
-            </Card>
         </CardGroup>
-
     );
 };
 
