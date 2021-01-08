@@ -8,11 +8,12 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Chat from './pages/Chat';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="d-flex flex-column min-vh-100">
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
@@ -20,6 +21,7 @@ function App() {
           <Route path="/register" exact component={Register} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/chat" exact component={Chat} />
+          <Route component={NotFound} />
         </Switch>
         <Footer />
       </div>

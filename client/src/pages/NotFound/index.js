@@ -1,16 +1,17 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Home = () => {
+const NotFound = () => {
   return (
-    <Container className="flex-grow-1 mt-2">
+    <Container className="flex-grow-1 text-center">
       <Row>
         <Col>
-          <p className="text-center">Hello World</p>
+          <h1>Oops!</h1>
+          <p>This page doesn't exist.</p>
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default Home;
+export default NotFound;
