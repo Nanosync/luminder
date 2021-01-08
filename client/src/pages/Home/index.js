@@ -31,7 +31,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user) {
-      API.post("advertise", { uid: user.uid })
+      API.post("cards/advertise", { uid: user.uid })
         .then(() => console.log("advertised"))
         .catch(err => console.log("err advertise"));
 

@@ -37,9 +37,16 @@ router.route('/advertise').post((req, res) => {
     return;
   }
 
-  Cards.deleteOne({ "uid": uid });
+  console.log("Advertise");
+
+  Cards.deleteOne({ "uid": uid }).catch(err => console.log(`No cards with uid ${uid}`));
   User.findOne({ "uid": uid })
   .then(user => {
+    if (!user) {
+      console.log("ERROR: " + user);
+      return;
+    }
+
     const { name, photos, gender, age, modules, bio } = user;
     const newCard = new Cards({uid,
       name,
