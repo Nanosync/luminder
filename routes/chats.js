@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route("/getchat/:id").get((req, res) => {
-  Chat.findOne({_id: req.params.id})
+  Chat.findById({_id: req.params.id})
     .then((chat) => res.json(chat))
     .catch((err) => res.status(400).json("Error: " + err));
 });

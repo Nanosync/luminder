@@ -15,7 +15,8 @@ const INITIAL_STATE = {
   chatList: [],
   chats: [],
   uid: "",
-  name: ""
+  name: "",
+  newText: "",
 };
 
 class Chat extends Component {
@@ -84,8 +85,8 @@ class Chat extends Component {
     if (user) {
       this.setState({
         uid: user.uid,
-        name: user.name
-      })
+        name: user.name,
+      });
       this.fetchData();
     }
   }
@@ -93,14 +94,19 @@ class Chat extends Component {
   changeFocus(idx) {
     this.setState({
       currentChat: idx,
-    })
+    });
   }
 
-  // componentDidUpdate() {
-  //   if (this.context) {
-  //     this.fetchData();
-  //   }
-  // }
+  onSubmit(event) {
+    event.preventDefault();
+
+    //TODO
+    console.log(this.state.newText);
+  }
+
+  onChange = (event) => {
+    this.setState({ newText: event.target.value });
+  };
 
   render() {
     return (
@@ -139,40 +145,45 @@ class Chat extends Component {
                 </div>
                 <div className="middle">
                   <div className="d-flex flex-column ">
-                    {this.state.chats[0] !== undefined && this.state.chats[this.state.currentChat].messages.map(
-                      (element, index) => (
+                    {this.state.chats[0] !== undefined &&
+                      this.state.chats[
+                        this.state.currentChat
+                      ].messages.map((element, index) => (
                         <ChatBubble
                           key={index}
                           message={element.message}
                           direction={
-                            element.from ===
-                              this.state.uid
-                              ? "right"
-                              : "left"
+                            element.from === this.state.uid ? "right" : "left"
                           }
                           photo={""}
                           name={
-                            element.from ===
-                              this.state.uid
-                              ? this.state.chats[this.state.currentChat].recipient
+                            element.from === this.state.uid
+                              ? this.state.chats[this.state.currentChat]
+                                  .recipient
                               : this.state.name
                           }
                         />
-                      )
-                    )}
-
+                      ))}
                   </div>
                 </div>
                 <div className="bottom-bar mt-5 d-flex justify-content-center">
-                  <Form>
-                    <Form.Group controlId="chat">
-                      <Form.Control
-                        type="email"
-                        placeholder="type message here..."
-                      />
-                    </Form.Group>
-                  </Form>
-                  <Button className="btn-chat-send ml-4" variant="primary">Send</Button>
+                  <form onSubmit={e => this.onSubmit(e)}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="type message here..."
+                      onChange={this.onChange}
+                      value={this.state.newText}
+                      name="newText"
+                    />
+                    <Button
+                      type="submit"
+                      className="btn-chat-send ml-4"
+                      variant="primary"
+                    >
+                      Send
+                    </Button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -182,7 +193,5 @@ class Chat extends Component {
     );
   }
 }
-
-
 
 export default Chat;
