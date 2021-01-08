@@ -3,6 +3,10 @@
   object-fit: cover;
 }
 
+.chat-send-button {
+  border-radius: 100%;
+}
+
 .chat-text {
   padding: 1rem;
 }

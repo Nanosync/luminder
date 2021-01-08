@@ -38,6 +38,16 @@ const Chat = () => {
               name="User 1"
             />
           </div>
+          <div>
+            <Form>
+              <Form.Group controlId="chat">
+                <Form.Control type="email" placeholder="type message here..." />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="chat-send-button">
+            <Button variant="primary">.</Button>
+          </div>
         </Col>
       </Row>
     </Container>
