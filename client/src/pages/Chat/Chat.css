@@ -1,0 +1,13 @@
+.chat-user-photo img {
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.chat-bubble {
+	margin: 40px;
+  display: inline-block;
+  position: relative;
+	width: 100%;
+	background-color: rgb(255, 226, 105);
+}
+
