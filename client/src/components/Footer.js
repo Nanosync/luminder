@@ -8,7 +8,7 @@ function Footer() {
       <Container>
         <Row>
           <Col>
-            <p className="text-center">made for hack n roll 2021</p>
+            <p className="text-center">Created in <a href="https://hacknroll.nushackers.org/" rel="noopener noreferrer" target="_blank">Hack&amp;Roll 2021</a> - by Benedict, Samuel, Shimin, Wanxian</p>
           </Col>
         </Row>
       </Container>
