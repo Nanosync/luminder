@@ -16,6 +16,7 @@ const Home = () => {
 
   if (!user) {
     history.push("/login");
+    return null;
   }
 
   return (
@@ -29,9 +30,6 @@ const Home = () => {
           <ProfileDetailCard header="Bio" text={LOREM_IPSUM} />
           <ProfileDetailCard className="mt-4" header="Academic Plan" text={LOREM_IPSUM} />
         </Col>
-      </Row>
-      <Row>
-        <Col>{user ? user.uid : "not logged in"}</Col>
       </Row>
     </Container>
   );

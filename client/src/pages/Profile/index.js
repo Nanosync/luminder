@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   profilePhoto: "",
 
   error: null,
+  fetchedData: false,
 };
 
 class Profile extends Component {
@@ -32,14 +33,10 @@ class Profile extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  componentDidMount() {
-    const user = this.context;
-
-    if (!user) {
-      // this.props.history.push("/login");
-    } else {
+  fetchData() {
+    if (!this.state.fetchedData) {
+      this.setState({ fetchedData: true });
       // const uid = user.uid; //TODO
-
       const uid = "5ff8304358db651406d5281f";
       const query = "users/" + uid;
       API.get(query)
@@ -63,9 +60,27 @@ class Profile extends Component {
     }
   }
 
+  componentDidMount() {
+    const user = this.context;
+    
+    if (user) {
+      this.fetchData();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.context) {
+      this.fetchData();
+    }
+  }
+
   // TODO
 
   render() {
+    if (!this.context) {
+      return <div></div>;
+    } else {}
+
     return (
       <Container className="flex-grow-1">
         <Row>
@@ -100,9 +115,7 @@ class Profile extends Component {
               className="mt-4"
               header="Academic Plan"
               text={this.state.modules.map((element, index) => (
-                <div key={index}>
-                  <p>{element}</p>
-                </div>
+                <li key={index}>{element}</li>
               ))}
             />
             <div className="text-right mt-4">

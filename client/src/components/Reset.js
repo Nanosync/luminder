@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Luminder from "./luminder.png";
+import Logo from "../logo.png";
 import "./Login.css";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -50,9 +50,9 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <div className="Container">
-        <div className="Header">
-          <img src={Luminder} alt="" id="header-img" />
+      <div className="login-container">
+        <div className="login-header">
+          <img src={Logo} alt="" id="header-img" />
         </div>
         <form onSubmit={this.onSubmit}>
           <h3 id="title">Reset Password</h3>

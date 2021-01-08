@@ -1,4 +1,4 @@
-import app from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 
 const config = {
@@ -12,8 +12,12 @@ const config = {
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
-    this.auth = app.auth();
+    firebase.initializeApp(config);
+    this.auth = firebase.auth();
+    this.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   doCreateUserWithEmailAndPassword = (email, password) =>
