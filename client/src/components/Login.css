@@ -1,0 +1,69 @@
+.Container {
+  width: 300px;
+  margin: auto;
+}
+
+#header-img {
+  width: 300px;
+}
+
+#title {
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+}
+
+#register-button {
+  margin: 5px 10px;
+  background-color: #56B829;
+  color: white;
+  padding: 3px 15px;
+  font-weight: 600;
+  border: solid white;
+  border-radius: 5px;
+}
+
+#signin-button {
+  margin: 5px 0px 5px 10px;
+  background-color: #2672EC;
+  color: white;
+  padding: 3px 15px;
+  font-weight: 600;
+  border: solid white;
+  border-radius: 5px;
+}
+
+#signin-button:disabled {
+  margin: 5px 0px 5px 10px;
+  background-color: grey;
+  opacity: 80%;
+  color: white;
+  padding: 3px 15px;
+  font-weight: 600;
+  border: solid white;
+  border-radius: 5px;
+}
+
+#submit-button {
+  margin: 5px 0px 5px 10px;
+  background-color: #2672EC;
+  color: white;
+  padding: 3px 15px;
+  font-weight: 600;
+  border: solid white;
+  border-radius: 5px;
+}
+
+#submit-button:disabled {
+  margin: 5px 0px 5px 10px;
+  background-color: grey;
+  opacity: 80%;
+  color: white;
+  padding: 3px 15px;
+  font-weight: 600;
+  border: solid white;
+  border-radius: 5px;
+}
