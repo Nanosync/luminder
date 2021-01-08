@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   likes: [],
   dislikes: [],
   profilePhoto: "",
+  age: 0,
 
   error: null,
   fetchedData: false,
@@ -54,6 +55,7 @@ class Profile extends Component {
             likes: response.data.likes,
             dislikes: response.data.dislikes,
             profilePhoto: response.data.profilePhoto,
+            age: response.data.age
           });
         })
         .catch((error) => {
@@ -103,6 +105,7 @@ class Profile extends Component {
               <div className="ml-4 align-self-center">
                 <p>Name: {this.state.name}</p>
                 <p>Gender: {this.state.gender}</p>
+                <p>Age: {this.state.age}</p>
               </div>
             </div>
             <div className="mt-4 mb-4">
