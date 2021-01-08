@@ -1,10 +1,10 @@
 import React from 'react';
 import UserPhotoCarousel from './UserPhotoCarousel';
 
-const ProfileCard = ({name, age}) => {
+const ProfileCard = ({name, age, photos}) => {
   return (
     <>
-      <UserPhotoCarousel />
+      <UserPhotoCarousel photos={photos} />
       <h1 className="text-center my-3">{name}, {age}</h1>
     </>
   );

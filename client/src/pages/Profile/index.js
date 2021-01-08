@@ -103,7 +103,7 @@ class Profile extends Component {
           <Col>
             <div className="d-flex">
               <Image
-                src={UserPhoto1}
+                src={this.state.photos[0]}
                 width="150px"
                 height="150px"
                 roundedCircle
@@ -117,7 +117,7 @@ class Profile extends Component {
             </div>
             <div className="mt-4 mb-4">
               <h1>Photo Booth</h1>
-              <ProfileImageCard />
+              <ProfileImageCard photos={this.state.photos} />
               <AddPhoto />
             </div>
           </Col>

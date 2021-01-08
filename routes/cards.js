@@ -75,17 +75,15 @@ router.route('/swipe').post((req, res) => {
     return;
   }
 
-  const newSwipedCard = new SwipedCard({uid, targetUid, action});
-
   SwipedCard.exists({ uid: uid, targetUid: targetUid })
   .then(exists => {
     if (exists) {
       console.log(`${uid} already swiped ${targetUid}!`);
       res.status(400).json({ "error": "swiped user already"});
-      return;
     } else {
+      const newSwipedCard = new SwipedCard({uid, targetUid, action});
       newSwipedCard.save()
-      .then(() => res.json({ result: 'ok' }))
+      //.then(() => res.json({ result: 'ok' }))
       .catch(err => res.status(400).json('Error: ' + err));
     }
   })
@@ -104,8 +102,32 @@ router.route('/swipe').post((req, res) => {
 
       const newChat = new Chat({recipients});
       newChat.save()
-        .then(() => res.json({result: "matched"}))
+        //.then(() => res.json({result: "matched"}))
         .catch(err => res.status(400).json('Error: ' + err));
+
+      User.findOne({ "uid": uid })
+      .then(user => {
+        if (!user) {
+          return;
+        }
+        
+        user.chats = [...user.chats, newChat.id];
+        user.save();
+      });
+
+      User.findOne({ "uid": targetUid })
+      .then(user => {
+        if (!user) {
+          return;
+        }
+        
+        user.chats = [...user.chats, newChat.id];
+        user.save();
+      });
+
+      res.json({result: "matched"});
+    } else {
+      res.json({result: "ok"});
     }
   });
 });
