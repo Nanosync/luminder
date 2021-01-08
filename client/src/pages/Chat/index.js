@@ -1,6 +1,6 @@
 import React, { useContext, Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import ChatList from "../../components/ChatList";
 import "./Chat.css";
 import { MOCK_CHAT_USERLIST } from "./MockChatData";
@@ -119,46 +119,66 @@ class Chat extends Component {
             </ListGroup>
           </Col>
           <Col lg={8}>
-            <h1>
-              {this.state.chats[this.state.currentChat]
-                ? this.state.chats[this.state.currentChat].recipient
-                : ""}
-            </h1>
-            <div className="d-flex flex-column ">
-              {this.state.chats[0] !== undefined && this.state.chats[this.state.currentChat].messages.map(
-                (element, index) => (
-                  <ChatBubble
-                    key={index}
-                    message={element.message}
-                    direction={
-                      element.from ===
-                      this.state.uid
-                        ? "right"
-                        : "left"
-                    }
-                    photo={""}
-                    name={
-                      element.from ===
-                      this.state.uid
-                        ? this.state.chats[this.state.currentChat].recipient
-                        : this.state.name
-                    }
-                  />
-                )
-              )}
-            </div>
-            <div>
-              <Form>
-                <Form.Group controlId="chat">
-                  <Form.Control
-                    type="email"
-                    placeholder="type message here..."
-                  />
-                </Form.Group>
-              </Form>
-            </div>
-            <div className="chat-send-button">
-              <Button variant="primary">Send</Button>
+            <div className="container">
+              <div className="chatbox">
+                <div className="top-bar d-flex justify-content-center">
+                  <div className="profile">
+                    <Image
+                      src={UserPhoto1}
+                      width="50px"
+                      height="50px"
+                      roundedCircle
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="name ml-3">
+                    {this.state.chats[this.state.currentChat]
+                      ? this.state.chats[this.state.currentChat].recipient
+                      : ""}
+                  </div>
+                </div>
+                <div className="middle">
+                  <div className="d-flex flex-column ">
+                    {this.state.chats[0] !== undefined && this.state.chats[this.state.currentChat].messages.map(
+                      (element, index) => (
+                        <ChatBubble
+                          key={index}
+                          message={element.message}
+                          direction={
+                            element.from ===
+                              this.state.uid
+                              ? "right"
+                              : "left"
+                          }
+                          photo={""}
+                          name={
+                            element.from ===
+                              this.state.uid
+                              ? this.state.chats[this.state.currentChat].recipient
+                              : this.state.name
+                          }
+                        />
+                      )
+                    )}
+
+                  </div>
+                </div>
+                <div className="bottom-bar mt-5">
+                  <div className="d-flex text-right align-items-center h-100">
+                    <Form>
+                      <Form.Group controlId="chat">
+                        <Form.Control
+                          type="email"
+                          placeholder="type message here..."
+                        />
+                      </Form.Group>
+                    </Form>
+                  </div>
+                  <div className="chat-send-button">
+                    <Button variant="primary">.</Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
@@ -166,5 +186,7 @@ class Chat extends Component {
     );
   }
 }
+
+
 
 export default Chat;

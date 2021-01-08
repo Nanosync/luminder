@@ -1,8 +1,9 @@
 import React, { useContext, Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Button, Image, Card } from "react-bootstrap";
 import ProfileDetailCard from "../../components/ProfileDetailCard";
 import ProfileImageCard from "../../components/ProfileImageCard";
+import AddPhoto from "../../components/AddPhoto";
 import { AuthUserContext } from "../../components/Session";
 import axios from "axios";
 import API from "../../api";
@@ -63,7 +64,7 @@ class Profile extends Component {
 
   componentDidMount() {
     const user = this.context;
-    
+
     if (user) {
       this.fetchData();
     }
@@ -80,7 +81,7 @@ class Profile extends Component {
   render() {
     if (!this.context) {
       return <div></div>;
-    } else {}
+    } else { }
 
     return (
       <Container className="flex-grow-1">
@@ -107,6 +108,7 @@ class Profile extends Component {
             <div className="mt-4 mb-4">
               <h1>Photo Booth</h1>
               <ProfileImageCard />
+              <AddPhoto />
             </div>
           </Col>
           <Col>
