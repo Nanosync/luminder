@@ -27,11 +27,14 @@ const handleYes = (e, { uid, targetUid }) => {
 const Home = () => {
   const user = useContext(AuthUserContext);
   const history = useHistory();
+  const [advertised, setAdvertised] = useState(false);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    if (user) {
-      API.post("advertise", { uid: user.uid })
+    if (!advertised && user && user.uid) {
+      setAdvertised(true);
+      console.log("Advertised");
+      API.post("cards/advertise", { uid: user.uid })
         .then(() => console.log("advertised"))
         .catch(err => console.log("err advertise"));
 

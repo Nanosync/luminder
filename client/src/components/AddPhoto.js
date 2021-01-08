@@ -1,16 +1,16 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 const AddPhoto = () => {
     return (
-        <Card class="card text-center bg-white" className="align-self-center">
-            <h5 class="card-header">Add more photos</h5>
-            <form>
-                <div class="form-group" className="mt-4 mb-4">
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1"></input>
-                </div>
-            </form>
+        <Card className="text-center mt-4">
+            <h5 className="card-header">Add a photo</h5>
+            <Form>
+                <Form.Group>
+                    <Form.File id="profileFormControlFile1" />
+                </Form.Group>
+            </Form>
             <Button variant="primary">
                 Upload Photo
             </Button>
