@@ -12,13 +12,14 @@ router.route('/add').post((req, res) => {
   const uid = req.body.uid;
   const gender = req.body.gender;
   const bio = req.body.bio;
+  const photos = req.body.photos;
   const modules = req.body.modules;
   const chats = req.body.chats;
   const matches = req.body.matches;
   const likes = req.body.likes;
   const dislikes = req.body.dislikes;
 
-  const newUser = new User({name, uid, gender, bio, modules, chats, matches, likes, dislikes});
+  const newUser = new User({name, uid, gender, bio, photos, modules, chats, matches, likes, dislikes});
 
   newUser.save()
     .then(() => res.json('User added!'))
@@ -44,6 +45,7 @@ router.route('/update/:id').post((req, res) => {
       user.uid = req.body.uid;
       user.gender = req.body.gender;
       user.bio = req.body.bio;
+      user.photos = req.body.photos;
       user.modules = req.body.modules;
       user.chats = req.body.chats;
       user.matches = req.body.matches;
