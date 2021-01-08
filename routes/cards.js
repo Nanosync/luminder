@@ -13,13 +13,16 @@ router.route('/').get((req, res) => {
 
   SwipedCards.find({ "uid" : uid })
     .then(swipedCards => {
-      // TODO: update algo
-      console.log(swipedCards);
-      let filter = { "targetUid": { $nin: [uid] } };
-      //if (swipedCards.length === 0) {
-      //  filter = [uid];
-      //}
-      Cards.find(filter)
+      if (!swipedCards) {
+        res.status(400).json('error');
+        return;
+      }
+
+      let ids = [uid];
+      swipedCards.forEach(card => ids.push(card.targetUid));
+      console.log(ids);
+
+      Cards.find({ "uid": { $nin: ids } })
       .then(cards => res.json(cards))
       .catch(err => res.status(400).json('Error: ' + err));
     })
@@ -60,12 +63,18 @@ router.route('/swipe').post((req, res) => {
     return;
   }
 
+  if (uid === targetUid) {
+    res.status(400).json({ "error": "cannot swipe self" });
+    return;
+  }
+
   const newSwipedCard = new SwipedCards({uid, targetUid, action});
 
   SwipedCards.exists({ uid: uid, targetUid: targetUid })
   .then(exists => {
     if (exists) {
       console.log(`${uid} already swiped ${targetUid}!`);
+      res.status(400).json({ "error": "swiped user already"});
     } else {
       newSwipedCard.save()
       .then(() => res.json({ result: 'ok' }))
