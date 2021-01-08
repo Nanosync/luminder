@@ -61,12 +61,12 @@ const Home = () => {
       </Container>
     );
   }
-  
+
   return (
     <Container className="flex-grow-1 d-flex">
       <Row className="align-self-center">
         <Col xs={12} sm className="mt-2">
-          <ProfileCard name={cards[0].name} age={cards[0].age} />
+          <ProfileCard name={cards[0].name} age={cards[0].age} photos={cards[0].photos} />
           <ActionButton onClickNo={(e) => handleNo(e, cards[0].uid)} onClickYes={(e) => handleYes(e, cards[0].uid)} />
         </Col>
         <Col className="d-none d-md-block">
