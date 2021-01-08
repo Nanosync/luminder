@@ -21,6 +21,9 @@ app.use(express.json());
 const usersRouter = require('./routes/users');
 app.use('/users', usersRouter);
 
+const chatsRouter = require('./routes/chats');
+app.use('/chats', chatsRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
