@@ -37,9 +37,10 @@ class Profile extends Component {
   fetchData() {
     if (!this.state.fetchedData) {
       this.setState({ fetchedData: true });
-      // const uid = user.uid; //TODO
-      const uid = "5ff8304358db651406d5281f";
-      const query = "users/" + uid;
+      const user = this.context;
+      const uid = user.uid;
+    
+      const query = "users/getchat/" + uid;
       API.get(query)
         .then((response) => {
           this.setState({
@@ -102,7 +103,6 @@ class Profile extends Component {
               <div className="ml-4 align-self-center">
                 <p>Name: {this.state.name}</p>
                 <p>Gender: {this.state.gender}</p>
-                {console.log(this.state.name)}
               </div>
             </div>
             <div className="mt-4 mb-4">

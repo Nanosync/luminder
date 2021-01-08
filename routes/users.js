@@ -1,13 +1,13 @@
-const router = require('express').Router();
-let User = require('../models/user.model');
+const router = require("express").Router();
+let User = require("../models/user.model");
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   User.find()
-    .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route("/add").post((req, res) => {
   const name = req.body.name;
   const uid = req.body.uid;
   const gender = req.body.gender;
@@ -20,28 +20,48 @@ router.route('/add').post((req, res) => {
   const dislikes = req.body.dislikes;
   const profilePhoto = req.body.profilePhoto;
 
-  const newUser = new User({name, uid, gender, bio, photos, modules, chats, matches, likes, dislikes, profilePhoto});
+  const newUser = new User({
+    name,
+    uid,
+    gender,
+    bio,
+    photos,
+    modules,
+    chats,
+    matches,
+    likes,
+    dislikes,
+    profilePhoto,
+  });
 
-  newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+  newUser
+    .save()
+    .then(() => res.json("User added!"))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route("/:id").get((req, res) => {
   User.findById(req.params.id)
-    .then(user => res.json(user))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then((user) => res.json(user))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/:id').delete((req, res) => {
+
+router.route("/:id").delete((req, res) => {
   User.findByIdAndDelete(req.params.id)
-    .then(() => res.json('User deleted.'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json("User deleted."))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route('/update/:id').post((req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
+router.route("/getchat/:id").get((req, res) => {
+  User.findOne({uid: req.params.id})
+    .then((user) => res.json(user))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/update/:id").post((req, res) => {
+  User.findOne({uid: req.params.id})
+    .then((user) => {
       user.name = req.body.name;
       user.uid = req.body.uid;
       user.gender = req.body.gender;
@@ -54,11 +74,12 @@ router.route('/update/:id').post((req, res) => {
       user.dislikes = req.body.dislikes;
       user.profilePhoto = req.body.profilePhoto;
 
-      user.save()
-        .then(() => res.json('User updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+      user
+        .save()
+        .then(() => res.json("User updated!"))
+        .catch((err) => res.status(400).json("Error: " + err));
     })
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
