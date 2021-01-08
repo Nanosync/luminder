@@ -67,7 +67,7 @@ class Profile extends Component {
     const user = this.context;
     
     if (user) {
-      this.state ({
+      this.setState ({
         uid: user.uid
       })
       this.fetchData();
