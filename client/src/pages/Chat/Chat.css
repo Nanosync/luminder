@@ -4,10 +4,24 @@
 }
 
 .chat-bubble {
-	margin: 40px;
+	margin: 20px;
   display: inline-block;
   position: relative;
 	width: 100%;
 	background-color: rgb(255, 226, 105);
 }
 
+.chat-text {
+  padding: 1rem;
+}
+
+.chat-bubble::after {
+  content: " ";
+  position: absolute;
+  top: 16.5%;
+  right: 96%;
+  margin-top: -10px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: rgb(255, 226, 105) transparent transparent transparent;
+}
