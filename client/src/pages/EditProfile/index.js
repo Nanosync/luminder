@@ -20,6 +20,7 @@ const INITIAL_STATE = {
   likes: [],
   dislikes: [],
   profilePhoto: "",
+  uid: "",
 
   error: null,
   fetchedData: false,
@@ -66,6 +67,9 @@ class Profile extends Component {
     const user = this.context;
     
     if (user) {
+      this.state ({
+        uid: user.uid
+      })
       this.fetchData();
     }
   }
@@ -84,6 +88,7 @@ class Profile extends Component {
       gender: this.state.gender,
       bio: this.state.bio,
       photos: this.state.photos,
+      uid: this.state.uid,
       modules: this.state.modules,
       chats: this.state.chats,
       matches: this.state.matches,
