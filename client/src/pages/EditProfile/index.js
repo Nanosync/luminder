@@ -40,8 +40,7 @@ class Profile extends Component {
       const user = this.context;
       const uid = user.uid;
     
-      const query = "users/getchat/" + uid;
-      API.get(query)
+      API.get(`users/getchat/${uid}`)
         .then((response) => {
           this.setState({
             name: response.data.name,
@@ -54,6 +53,7 @@ class Profile extends Component {
             likes: response.data.likes,
             dislikes: response.data.dislikes,
             profilePhoto: response.data.profilePhoto,
+            age: response.data.age
           });
         })
         .catch((error) => {
@@ -89,7 +89,8 @@ class Profile extends Component {
       matches: this.state.matches,
       likes: this.state.likes,
       dislikes: this.state.dislikes,
-      profilePhoto: this.state.profilePhoto
+      profilePhoto: this.state.profilePhoto,
+      age: this.state.age
     }
 
     const uid = this.context.uid;
@@ -140,6 +141,15 @@ class Profile extends Component {
                     onChange={this.onChange}
                     value={this.state.gender}
                     name="gender"
+                  />
+                  <label>Age</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Age"
+                    onChange={this.onChange}
+                    value={this.state.age}
+                    name="age"
                   />
                 </div>
               </div>

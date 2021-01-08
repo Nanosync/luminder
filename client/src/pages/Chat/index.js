@@ -163,20 +163,16 @@ class Chat extends Component {
 
                   </div>
                 </div>
-                <div className="bottom-bar mt-5">
-                  <div className="d-flex text-right align-items-center h-100">
-                    <Form>
-                      <Form.Group controlId="chat">
-                        <Form.Control
-                          type="email"
-                          placeholder="type message here..."
-                        />
-                      </Form.Group>
-                    </Form>
-                  </div>
-                  <div className="chat-send-button">
-                    <Button variant="primary">.</Button>
-                  </div>
+                <div className="bottom-bar mt-5 d-flex justify-content-center">
+                  <Form>
+                    <Form.Group controlId="chat">
+                      <Form.Control
+                        type="email"
+                        placeholder="type message here..."
+                      />
+                    </Form.Group>
+                  </Form>
+                  <Button className="btn-chat-send ml-4" variant="primary">Send</Button>
                 </div>
               </div>
             </div>
