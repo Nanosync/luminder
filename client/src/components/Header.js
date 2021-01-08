@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../logo.png';
-import LogoutIcon from '../logout.svg';
+import SignOutButton from './SignOut/SignOutButton';
 import './Header.css';
 import { AuthUserContext } from "./Session";
 
@@ -36,9 +36,7 @@ function Header() {
       </Navbar.Collapse>
       <Navbar.Collapse id="basic-navbar-nav-right">
         <Nav className={user ? "ml-auto" : "ml-auto-hidden"}>
-          <Nav.Link as={Link} to="/logout">
-            <img src={LogoutIcon} width="32px" height="32px" title="Logout" alt="Logout" />
-          </Nav.Link>
+          <SignOutButton />
         </Nav>
       </Navbar.Collapse>
     </Navbar>
