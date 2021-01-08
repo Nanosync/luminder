@@ -6,14 +6,14 @@ const ChatBubble = ({ direction, photo, name, message }) => {
     return (
       <div className="d-flex flex-row flex-nowrap">
         <div className="chat-user-photo mr-2">
-          <img
+          {/* <img
             src={photo}
             width="64px"
             height="64px"
             alt="User Avatar"
-          />
+          /> */}
           <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">{name}</h5>
+            {/* <h5 className="mb-1">{name}</h5> */}
           </div>
         </div>
         <div className="chat-bubble">
@@ -28,12 +28,12 @@ const ChatBubble = ({ direction, photo, name, message }) => {
           <p className="chat-text mb-1">{message}</p>
         </div>
         <div className="chat-user-photo mr-2">
-          <img
+          {/* <img
             src={photo}
             width="64px"
             height="64px"
             alt="User Avatar"
-          />
+          /> */}
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{name}</h5>
           </div>

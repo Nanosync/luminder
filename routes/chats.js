@@ -13,12 +13,26 @@ router.route("/getchat/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+
+router.route("/update/:id").post((req, res) => {
+  Chat.findById({_id: req.params.id})
+    .then((chat) => {
+      chat.recipients = req.body.recipients;
+      chat.messages = req.body.messages;
+
+      chat
+        .save()
+        .then(() => res.json({ "result": "Chat updated!" }))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route('/add').post((req, res) => {
-  const _id = req.body.chatId;
   const recipients = req.body.recipients;
   const messages = req.body.messages;
 
-  const newChat = new Chat({_id, recipients, messages});
+  const newChat = new Chat({recipients, messages});
 
   newChat.save()
     .then(() => res.json('Chat added!'))

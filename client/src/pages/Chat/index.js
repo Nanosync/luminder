@@ -1,14 +1,13 @@
-import React, { useContext, Component } from "react";
+import React, { Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import ChatList from "../../components/ChatList";
 import "./Chat.css";
-import { MOCK_CHAT_USERLIST } from "./MockChatData";
-import { useHistory } from "react-router-dom";
 import { AuthUserContext } from "../../components/Session";
 import ChatBubble from "../../components/ChatBubble";
 import API from "../../api";
 import ListGroup from "react-bootstrap/ListGroup";
+import api from "../../api";
 
 const INITIAL_STATE = {
   currentChat: 0,
@@ -35,13 +34,14 @@ class Chat extends Component {
         .then((response1) => {
           const recipients = response1.data.recipients;
           const sender =
-            recipients[0] === this.uid ? recipients[1] : recipients[0];
-
+            recipients[0] === this.state.uid ? recipients[1] : recipients[0];
+          const chatId = response1.data._id;
           API.get("users/getchat/" + sender)
             .then((response2) => {
               const chat = {
-                chatId: response1.data.chatId,
+                chatId: chatId,
                 recipient: response2.data.name,
+                recipientID: sender,
                 photo: response2.data.photo,
                 messages: response1.data.messages,
               };
@@ -100,8 +100,34 @@ class Chat extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    //TODO
-    console.log(this.state.newText);
+    const text = this.state.newText;
+
+    if (text.trim() !== "") {
+      const chat = this.state.chats[this.state.currentChat];
+      const chatID = chat.chatId;
+      const messages = chat.messages ? chat.messages : [];
+      const from = this.state.uid;
+      const to = chat.recipientID;
+
+      const message = {
+        from: from,
+        to: to,
+        message: text,
+      };
+
+      messages[messages.length] = message;
+      const recipients = [from, to];
+
+      const chat1 = {
+        recipients: recipients,
+        messages: messages,
+      };
+      console.log(chat1);
+      api
+        .post("/chats/update/" + chatID, chat1)
+        .then((a) => this.updateChats())
+        .catch((err) => console.log(err));
+    }
   }
 
   onChange = (event) => {
@@ -143,7 +169,10 @@ class Chat extends Component {
                       : ""}
                   </div>
                 </div>
-                <div className="middle">
+                <div
+                  className="middle"
+                  style={{ overflow: "scroll", paddingBottom: "50px" }}
+                >
                   <div className="d-flex flex-column ">
                     {this.state.chats[0] !== undefined &&
                       this.state.chats[
@@ -157,7 +186,7 @@ class Chat extends Component {
                           }
                           photo={""}
                           name={
-                            element.from === this.state.uid
+                            element.from !== this.state.uid
                               ? this.state.chats[this.state.currentChat]
                                   .recipient
                               : this.state.name
@@ -166,8 +195,8 @@ class Chat extends Component {
                       ))}
                   </div>
                 </div>
-                <div className="bottom-bar mt-5 d-flex justify-content-center">
-                  <form onSubmit={e => this.onSubmit(e)}>
+                <form onSubmit={(e) => this.onSubmit(e)}>
+                  <div className="bottom-bar mt-5 d-flex justify-content-center align-content-center">
                     <input
                       type="text"
                       className="form-control"
@@ -175,6 +204,7 @@ class Chat extends Component {
                       onChange={this.onChange}
                       value={this.state.newText}
                       name="newText"
+                      style={{marginLeft: "30px"}}
                     />
                     <Button
                       type="submit"
@@ -183,8 +213,8 @@ class Chat extends Component {
                     >
                       Send
                     </Button>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
           </Col>
