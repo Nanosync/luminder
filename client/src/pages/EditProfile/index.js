@@ -1,6 +1,6 @@
 import React, { useContext, Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Button, Image, Form } from "react-bootstrap";
 import ProfileDetailCard from "../../components/ProfileDetailCard";
 import ProfileImageCard from "../../components/ProfileImageCard";
 import { AuthUserContext } from "../../components/Session";
@@ -106,7 +106,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Container className="flex-grow-1">
           <Row>
             <Col>
@@ -124,8 +124,8 @@ class Profile extends Component {
                   style={{ objectFit: "cover" }}
                 />
                 <div className="ml-4 align-self-center">
-                  <label>Name</label>
-                  <input
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
                     type="text"
                     className="form-control"
                     placeholder="Enter Name"
@@ -133,8 +133,8 @@ class Profile extends Component {
                     value={this.state.name}
                     name="name"
                   />
-                  <label>Gender</label>
-                  <input
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Control
                     type="text"
                     className="form-control"
                     placeholder="Enter Gender"
@@ -142,8 +142,8 @@ class Profile extends Component {
                     value={this.state.gender}
                     name="gender"
                   />
-                  <label>Age</label>
-                  <input
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control
                     type="text"
                     className="form-control"
                     placeholder="Enter Age"
@@ -165,7 +165,7 @@ class Profile extends Component {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>
-                    <input
+                    <Form.Control
                       type="text"
                       className="form-control"
                       placeholder="Enter Bio"
@@ -183,7 +183,7 @@ class Profile extends Component {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>
-                    <input
+                    <Form.Control
                       type="text"
                       className="form-control"
                       placeholder="Enter Academic Plan"
@@ -207,7 +207,7 @@ class Profile extends Component {
             </Col>
           </Row>
         </Container>
-      </form>
+      </Form>
     );
   }
 }

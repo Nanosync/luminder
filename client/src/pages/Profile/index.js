@@ -41,8 +41,7 @@ class Profile extends Component {
       const user = this.context;
       const uid = user.uid;
     
-      const query = "users/getchat/" + uid;
-      API.get(query)
+      API.get(`users/${uid}`)
         .then((response) => {
           this.setState({
             name: response.data.name,

@@ -41,8 +41,21 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  User.findById(req.params.id)
-    .then((user) => res.json(user))
+  const uid = req.params.id;
+
+  if (!uid) {
+    res.status(400).json("empty");
+    return;
+  }
+
+  User.findOne({"uid": uid})
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({"result": "no user"});
+        return;
+      }
+      res.json(user)
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
