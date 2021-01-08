@@ -86,10 +86,11 @@ router.route("/update/:id").post((req, res) => {
       user.likes = req.body.likes;
       user.dislikes = req.body.dislikes;
       user.profilePhoto = req.body.profilePhoto;
+      user.age = req.body.age;
 
       user
         .save()
-        .then(() => res.json("User updated!"))
+        .then(() => res.json({ "result": "User updated!" }))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));

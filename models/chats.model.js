@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const chatSchema = new Schema(
   {
-    chatId: {
-      type: String,
-      required: true,
-    },
     recipients: [String],
     messages: [{
       from: String,

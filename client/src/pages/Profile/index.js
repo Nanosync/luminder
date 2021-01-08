@@ -24,6 +24,7 @@ const INITIAL_STATE = {
 
   error: null,
   fetchedData: false,
+  shownData: false
 };
 
 class Profile extends Component {
@@ -54,7 +55,8 @@ class Profile extends Component {
             likes: response.data.likes,
             dislikes: response.data.dislikes,
             profilePhoto: response.data.profilePhoto,
-            age: response.data.age
+            age: response.data.age,
+            shownData: true
           });
         })
         .catch((error) => {
@@ -81,8 +83,14 @@ class Profile extends Component {
 
   render() {
     if (!this.context) {
-      return <div></div>;
-    } else { }
+      return (<div></div>);
+    }
+
+    if (!this.state.shownData) {
+      return (
+        <div>Loading...</div>
+      );
+    }
 
     return (
       <Container className="flex-grow-1">
