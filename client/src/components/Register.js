@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Luminder from "./luminder.png";
-import "./Login.css";
-import { withFirebase } from "./Firebase";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Logo from '../logo.png';
+import './Login.css';
+import { withFirebase } from './Firebase';
 
 const SignUpPage = () => {
   return (
@@ -13,7 +13,6 @@ const SignUpPage = () => {
 };
 
 const INITIAL_STATE = {
-  username: "",
   email: "",
   passwordOne: "",
   passwordTwo: "",
@@ -27,7 +26,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, passwordOne } = this.state;
+    const { email, passwordOne } = this.state;
     console.log(email);
     console.log(passwordOne);
 
@@ -49,18 +48,17 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
+    const { email, passwordOne, passwordTwo, error } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne.trim() === "" ||
-      email.trim() === "" ||
-      username.trim() === "";
+      email.trim() === "";
 
     return (
-      <div className="Container">
-        <div className="Header">
-          <img src={Luminder} alt="" id="header-img" />
+      <div className="login-container">
+        <div className="login-header">
+          <img src={Logo} alt="" id="header-img" />
         </div>
         <form onSubmit={this.onSubmit}>
           <h3 id="title">Register</h3>
@@ -74,18 +72,6 @@ class SignUpFormBase extends Component {
               onChange={this.onChange}
               value={email}
               name="email"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Username"
-              onChange={this.onChange}
-              value={username}
-              name="username"
             />
           </div>
 

@@ -1,13 +1,12 @@
 import React from 'react';
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
-import LoginComponent from '../../components/Login';
+import { Container, Row, Col } from "react-bootstrap";
 
 const Login = () => {
   return (
     <Container className="flex-grow-1 d-flex align-items-center justify-content-center">
       <Row>
         <Col>
-          <LoginComponent />
+          TODO
         </Col>
       </Row>
     </Container>
