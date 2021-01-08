@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import ChatList from "../../components/ChatList";
 import "./Chat.css";
 import { MOCK_CHAT_USERLIST } from "./MockChatData";
