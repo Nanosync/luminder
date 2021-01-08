@@ -37,9 +37,10 @@ class Profile extends Component {
   fetchData() {
     if (!this.state.fetchedData) {
       this.setState({ fetchedData: true });
-      // const uid = user.uid; //TODO
-      const uid = "5ff8304358db651406d5281f";
-      const query = "users/" + uid;
+      const user = this.context;
+      const uid = user.uid;
+    
+      const query = "users/getchat/" + uid;
       API.get(query)
         .then((response) => {
           this.setState({
@@ -91,9 +92,7 @@ class Profile extends Component {
       profilePhoto: this.state.profilePhoto
     }
 
-    // const uid = user.uid; //TODO
-
-    const uid = "5ff8304358db651406d5281f";
+    const uid = this.context.uid;
     const query = "users/update/" + uid;
 
     API.post(query, user)
@@ -142,7 +141,6 @@ class Profile extends Component {
                     value={this.state.gender}
                     name="gender"
                   />
-                  {console.log(this.state.name)}
                 </div>
               </div>
               <div className="mt-4 mb-4">
