@@ -14,6 +14,7 @@ const chatSchema = new Schema(
     to: {
       type: String
     },
+    recipients: [String],
     messages: [{
       from: String,
       to: String,

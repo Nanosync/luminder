@@ -9,11 +9,10 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
   const chatId = req.body.chatId;
-  const from = req.body.from;
-  const to = req.body.to;
+  const recipients = req.body.recipients;
   const messages = req.body.messages;
 
-  const newChat = new Chat({chatId, from, to, messages});
+  const newChat = new Chat({chatId, recipients, messages});
 
   newChat.save()
     .then(() => res.json('Chat added!'))
