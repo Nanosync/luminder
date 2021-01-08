@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../logo.png';
 import './Header.css';
+import { AuthUserContext } from "./Session";
 
 function Header() {
+  const user = useContext(AuthUserContext);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand as={Link} to="/">
@@ -18,7 +21,7 @@ function Header() {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className={user ? "mr-auto" : "mr-auto-hidden"}>
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>

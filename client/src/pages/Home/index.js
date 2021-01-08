@@ -5,11 +5,18 @@ import ActionButton from '../../components/ActionButton';
 import ProfileDetailCard from '../../components/ProfileDetailCard';
 import { AuthUserContext } from "../../components/Session";
 import './Home.css';
+import { useHistory } from "react-router-dom";
+
 
 const LOREM_IPSUM = "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis explicabo ad at aspernatur quam culpa. Officia soluta veritatis accusantium tenetur rem sint dignissimos voluptatibus quisquam, nulla sed, cumque reprehenderit quam?";
 
 const Home = () => {
   const user = useContext(AuthUserContext);
+  const history = useHistory();
+
+  if (!user) {
+    history.push("/login");
+  }
 
   return (
     <Container className="flex-grow-1 d-flex">

@@ -19,7 +19,6 @@ const withAuthentication = Component => {
           authUser
             ? this.setState({ authUser })
             : this.setState({ authUser: null });
-            console.log(authUser);
         },
       );
     }

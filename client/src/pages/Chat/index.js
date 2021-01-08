@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UserPhoto1 from '../../components/unsplash-1.jpg';
 import { Container, Row, Col } from 'react-bootstrap';
 import ChatList from '../../components/ChatList';
 import './Chat.css';
 import { MOCK_CHAT_USERLIST } from './MockChatData';
+import { useHistory } from "react-router-dom";
+import { AuthUserContext } from "../../components/Session";
+
 
 const Chat = () => {
+  const user = useContext(AuthUserContext);
+  const history = useHistory();
+
+  if (!user) {
+    // history.push("/login");
+  }
+
   return (
     <Container className="flex-grow-1">
       <Row>

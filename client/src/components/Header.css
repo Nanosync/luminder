@@ -5,3 +5,7 @@
 .navbar-dark .navbar-nav .nav-link {
   color: #ffffff !important;
 }
+
+.mr-auto-hidden {
+  display: none;
+}
