@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Chat from './pages/Chat';
 import NotFound from './pages/NotFound';
+import Reset from './pages/Reset';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" exact component={Register} />
           <Route path="/profile" exact component={Profile} />
           <Route path="/chat" exact component={Chat} />
+          <Route path="/reset" exact component={Reset} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

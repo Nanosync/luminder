@@ -5,19 +5,19 @@ import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { withFirebase } from "./Firebase";
 
-const SignInPage = () => (
+const PasswordForgetPage = () => (
   <div>
-    <SignInForm />
+    <PasswordForgetForm />
   </div>
 );
 
 const INITIAL_STATE = {
   email: "",
-  password: "",
+  success: false,
   error: null,
 };
 
-class SignInFormBase extends Component {
+class PasswordForgetFormBase extends Component {
   constructor(props) {
     super(props);
 
@@ -25,15 +25,15 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { email, password } = this.state;
+    const { email } = this.state;
 
     this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
+      .doPasswordReset(email)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push("/");
+        this.setState({success: true});
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({ error });
       });
 
@@ -45,9 +45,9 @@ class SignInFormBase extends Component {
   };
 
   render() {
-    const { email, password, error } = this.state;
-
-    const isInvalid = password === "" || email === "";
+    const { email, success, error } = this.state;
+ 
+    const isInvalid = email === '';
 
     return (
       <div className="Container">
@@ -55,7 +55,7 @@ class SignInFormBase extends Component {
           <img src={Luminder} alt="" id="header-img" />
         </div>
         <form onSubmit={this.onSubmit}>
-          <h3 id="title">Login</h3>
+          <h3 id="title">Reset Password</h3>
 
           <div className="form-group">
             <label>Email</label>
@@ -69,37 +69,20 @@ class SignInFormBase extends Component {
             />
           </div>
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Enter password"
-              onChange={this.onChange}
-              value={password}
-              name="password"
-            />
-          </div>
-
           <div className="buttons">
             <button type="submit" id="signin-button" disabled={isInvalid}>
-              Sign In
+              Reset Password
             </button>
-            <Link to="/register">
-              <button id="register-button">Register</button>
-            </Link>
           </div>
 
-          <p className="forgot-password text-left">
-            <a href="/reset">Forgot password?</a>
-          </p>
           {error && <p>{error.message}</p>}
+          {success && <p>Please check your email to reset your password.</p>}
         </form>
       </div>
     );
   }
 }
 
-const SignInForm = withRouter(withFirebase(SignInFormBase));
+export default PasswordForgetPage;
 
-export default SignInPage;
+const PasswordForgetForm = withRouter(withFirebase(PasswordForgetFormBase));

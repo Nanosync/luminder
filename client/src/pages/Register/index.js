@@ -1,11 +1,10 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-
+import RegisterComponent from '../../components/Register';
 
 const Register = () => {
   return (
     <div>
-      Register
+      <RegisterComponent />
     </div>
   );
 };
