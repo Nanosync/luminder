@@ -146,18 +146,6 @@ class Chat extends Component {
                   />
                 )
               )}
-              {/* <ChatBubble
-                message="Hello"
-                direction="left"
-                photo={UserPhoto1}
-                name="User 1"
-              />
-              <ChatBubble
-                message="Hello"
-                direction="right"
-                photo={UserPhoto1}
-                name="User 1"
-              /> */}
             </div>
             <div>
               <Form>
@@ -170,7 +158,7 @@ class Chat extends Component {
               </Form>
             </div>
             <div className="chat-send-button">
-              <Button variant="primary">.</Button>
+              <Button variant="primary">Send</Button>
             </div>
           </Col>
         </Row>
