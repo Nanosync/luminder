@@ -26,6 +26,9 @@ app.use('/users', usersRouter);
 const chatsRouter = require('./routes/chats');
 app.use('/chats', chatsRouter);
 
+const cardsRouter = require('./routes/cards');
+app.use('/cards', cardsRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
