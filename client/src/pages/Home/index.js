@@ -1,10 +1,15 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
   return (
-    <div>
-      <h1>This is the Home Page. Ben made this.</h1>
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <p className="text-center">Hello World</p>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
