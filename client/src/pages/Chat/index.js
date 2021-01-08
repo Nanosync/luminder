@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserPhoto1 from '../../components/unsplash-1.jpg';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import ChatList from '../../components/ChatList';
 import './Chat.css';
 import { MOCK_CHAT_USERLIST } from './MockChatData';
@@ -25,16 +25,28 @@ const Chat = () => {
         <Col lg={8}>
           <h1>chat w user</h1>
           <div className="d-flex">
-              <div className="chat-user-photo mr-2">
-                <img src={UserPhoto1} width="64px" height="64px" alt="User Avatar" roundedCircle />
-                <div className="d-flex w-100 justify-content-between">
-                  <h5 className="mb-1">user</h5>
-                </div>
-              </div>
-              <div className="chat-bubble">
-                <p className="chat-text mb-1">message</p>
+            <div className="chat-user-photo mr-2">
+              <img src={UserPhoto1} width="64px" height="64px" alt="User Avatar" roundedCircle />
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1">user</h5>
               </div>
             </div>
+            <div className="chat-bubble">
+              <p className="chat-text mb-1">message</p>
+            </div>
+          </div>
+          <div>
+            <Form>
+              <Form.Group controlId="chat">
+                <Form.Control type="email" placeholder="type message here..." />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="chat-send-button">
+            <Button variant="primary">.</Button>
+          </div>
+
+
         </Col>
       </Row>
     </Container>
