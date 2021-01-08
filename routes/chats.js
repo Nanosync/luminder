@@ -7,6 +7,12 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route("/getchat/:id").get((req, res) => {
+  Chat.findOne({chatId: req.params.id})
+    .then((chat) => res.json(chat))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route('/add').post((req, res) => {
   const chatId = req.body.chatId;
   const recipients = req.body.recipients;
