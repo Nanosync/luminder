@@ -1,17 +1,18 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
-import Chat from './pages/Chat';
-import NotFound from './pages/NotFound';
-import Reset from './pages/Reset';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+import Chat from "./pages/Chat";
+import NotFound from "./pages/NotFound";
+import Reset from "./pages/Reset";
+import { withAuthentication } from "./components/Session/";
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">
@@ -29,6 +30,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
-export default App;
+export default withAuthentication(App);
