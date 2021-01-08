@@ -10,7 +10,8 @@ import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import Reset from "./pages/Reset";
-import Edit from "./pages/editProfile";
+import Edit from "./pages/EditProfile";
+import Logout from "./pages/Logout";
 import { withAuthentication } from "./components/Session/";
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/chat" exact component={Chat} />
             <Route path="/reset" exact component={Reset} />
             <Route path="/edit" exact component={Edit} />
+            <Route path="/logout" exact component={Logout} />
             <Route component={NotFound} />
           </Switch>
           <Footer />
