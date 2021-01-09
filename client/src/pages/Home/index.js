@@ -63,7 +63,7 @@ const Home = () => {
   }
 
   return (
-    <Container className="flex-grow-1 d-flex">
+    <Container className="flex-grow-1 d-flex justify-content-center">
       <Row className="align-self-center">
         <Col xs={12} sm className="mt-2">
           <ProfileCard name={cards[0].name} age={cards[0].age} photos={cards[0].photos} />
