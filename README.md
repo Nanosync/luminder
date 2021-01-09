@@ -5,6 +5,13 @@ LuminDER is a dating app for NUS students that takes on the familiar interface o
 ## About
 This project was created by a 4-member team during [Hack&Roll 2021](https://hacknroll2021.devpost.com/) hackathon organised by [NUS Hackers](https://nushackers.org/). You may view our submission [here](https://devpost.com/software/luminder).
 
+## How to run the project
+```
+npm start
+cd client
+npm start
+```
+
 ## How we built it
 
 We used the MERN stack (Mongo, Express, React, Node), Bootstrap for styling and Firebase for authentication.
@@ -21,6 +28,6 @@ Setting up the entire project base from scratch, learning/re-learning React Boot
 
 Project setup and structuring, web development, system design, database management
 
-## What's next for LuminDER
+## What's next
 
 Make the chat real-time using web sockets and fix login issues.
