@@ -169,7 +169,7 @@ class Profile extends Component {
               </div>
               <div className="mt-4 mb-4">
                 <h1>Photo Booth</h1>
-                <ProfileImageCard />
+                <ProfileImageCard photos={this.state.photos}/>
               </div>
             </Col>
             <Col>
