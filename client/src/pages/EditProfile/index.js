@@ -131,7 +131,7 @@ class Profile extends Component {
             <Col>
               <div className="d-flex">
                 <Image
-                  src={UserPhoto1}
+                  src={this.state.photos.length === 0 ? "https://via.placeholder.com/150" : this.state.photos[0]}
                   width="150px"
                   height="150px"
                   roundedCircle
