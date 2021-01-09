@@ -19,7 +19,7 @@ Setting up the entire project base from scratch, learning/re-learning React Boot
 
 ## What we learned
 
-Project setup and structuring, system design, database management
+Project setup and structuring, web development, system design, database management
 
 ## What's next for LuminDER
 
