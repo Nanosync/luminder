@@ -138,7 +138,7 @@ class Chat extends Component {
                   </div>
                 </div>
                 <div className="middle">
-                  <div className="d-flex flex-column ">
+                  <div className="d-flex flex-column mt-4 ml-4 mr-4">
                     {this.state.chats[0] !== undefined && this.state.chats[this.state.currentChat].messages.map(
                       (element, index) => (
                         <ChatBubble
@@ -163,11 +163,11 @@ class Chat extends Component {
 
                   </div>
                 </div>
-                <div className="bottom-bar mt-5 d-flex justify-content-center">
+                <div className="bottom-bar d-flex justify-content-center align-items-center">
                   <Form>
                     <Form.Group controlId="chat">
                       <Form.Control
-                        type="email"
+                        type="text"
                         placeholder="type message here..."
                       />
                     </Form.Group>
