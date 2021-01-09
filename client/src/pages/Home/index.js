@@ -24,10 +24,12 @@ const Home = () => {
 
   const handleNo = (e, targetUid) => {
     sendAction(user.uid, targetUid, "dislike");
+    setCards(cards.slice(1));
   };
   
   const handleYes = (e, targetUid) => {
     sendAction(user.uid, targetUid, "like");
+    setCards(cards.slice(1));
   };
 
   useEffect(() => {
