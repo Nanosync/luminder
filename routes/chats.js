@@ -8,17 +8,31 @@ router.route('/').get((req, res) => {
 });
 
 router.route("/getchat/:id").get((req, res) => {
-  Chat.findOne({chatId: req.params.id})
+  Chat.findById({_id: req.params.id})
     .then((chat) => res.json(chat))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+
+router.route("/update/:id").post((req, res) => {
+  Chat.findById({_id: req.params.id})
+    .then((chat) => {
+      chat.recipients = req.body.recipients;
+      chat.messages = req.body.messages;
+
+      chat
+        .save()
+        .then(() => res.json({ "result": "Chat updated!" }))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route('/add').post((req, res) => {
-  const chatId = req.body.chatId;
   const recipients = req.body.recipients;
   const messages = req.body.messages;
 
-  const newChat = new Chat({chatId, recipients, messages});
+  const newChat = new Chat({recipients, messages});
 
   newChat.save()
     .then(() => res.json('Chat added!'))

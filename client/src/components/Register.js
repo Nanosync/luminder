@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Logo from '../logo.png';
 import './Login.css';
 import { withFirebase } from './Firebase';
+import API from "../api";
 
 const SignUpPage = () => {
   return (
@@ -27,20 +28,41 @@ class SignUpFormBase extends Component {
 
   onSubmit = (event) => {
     const { email, passwordOne } = this.state;
-    console.log(email);
-    console.log(passwordOne);
+    event.preventDefault();
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push("/");
+
+        const user = {
+          name: "name",
+          gender: "gender",
+          bio: "bio",
+          photos: [],
+          modules: [],
+          age: 21,
+          uid: authUser.user.uid,
+          chats: [],
+          matches: [],
+          likes: [],
+          dislikes: [],
+          profilePhoto: ""
+        }
+
+        console.log(user);
+
+        const query = "users/add";
+    
+        API.post(query, user)
+          .then(res => this.props.history.push("/"))
+          .catch(err => console.log(err));
       })
       .catch((error) => {
         this.setState({ error });
       });
 
-    event.preventDefault();
+    
   };
 
   onChange = (event) => {

@@ -1,10 +1,9 @@
-import React, { useContext, Component } from "react";
+import React, { Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Button, Image, Form } from "react-bootstrap";
 import ProfileDetailCard from "../../components/ProfileDetailCard";
 import ProfileImageCard from "../../components/ProfileImageCard";
 import { AuthUserContext } from "../../components/Session";
-import axios from "axios";
 import API from "../../api";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
@@ -20,9 +19,12 @@ const INITIAL_STATE = {
   likes: [],
   dislikes: [],
   profilePhoto: "",
+  uid: "",
+  age: 0,
 
   error: null,
   fetchedData: false,
+  shownData: false,
 };
 
 class Profile extends Component {
@@ -40,8 +42,7 @@ class Profile extends Component {
       const user = this.context;
       const uid = user.uid;
     
-      const query = "users/getchat/" + uid;
-      API.get(query)
+      API.get(`users/getchat/${uid}`)
         .then((response) => {
           this.setState({
             name: response.data.name,
@@ -54,6 +55,8 @@ class Profile extends Component {
             likes: response.data.likes,
             dislikes: response.data.dislikes,
             profilePhoto: response.data.profilePhoto,
+            age: response.data.age,
+            shownData: true
           });
         })
         .catch((error) => {
@@ -66,6 +69,9 @@ class Profile extends Component {
     const user = this.context;
     
     if (user) {
+      this.setState ({
+        uid: user.uid
+      })
       this.fetchData();
     }
   }
@@ -84,19 +90,24 @@ class Profile extends Component {
       gender: this.state.gender,
       bio: this.state.bio,
       photos: this.state.photos,
+      uid: this.state.uid,
       modules: this.state.modules,
       chats: this.state.chats,
       matches: this.state.matches,
       likes: this.state.likes,
       dislikes: this.state.dislikes,
-      profilePhoto: this.state.profilePhoto
+      profilePhoto: this.state.profilePhoto,
+      age: this.state.age
     }
 
     const uid = this.context.uid;
     const query = "users/update/" + uid;
 
     API.post(query, user)
-      .then(res => console.log(res.data));
+      .then(res => {
+        //console.log(res.data);
+        this.props.history.push("/profile");
+      });
   };
 
   onChange = (event) => {
@@ -104,8 +115,12 @@ class Profile extends Component {
   };
 
   render() {
+    if (!this.state.shownData) {
+      return (<div>Loading</div>);
+    }
+
     return (
-      <form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit}>
         <Container className="flex-grow-1">
           <Row>
             <Col>
@@ -123,8 +138,8 @@ class Profile extends Component {
                   style={{ objectFit: "cover" }}
                 />
                 <div className="ml-4 align-self-center">
-                  <label>Name</label>
-                  <input
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
                     type="text"
                     className="form-control"
                     placeholder="Enter Name"
@@ -132,14 +147,23 @@ class Profile extends Component {
                     value={this.state.name}
                     name="name"
                   />
-                  <label>Gender</label>
-                  <input
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Control
                     type="text"
                     className="form-control"
                     placeholder="Enter Gender"
                     onChange={this.onChange}
                     value={this.state.gender}
                     name="gender"
+                  />
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Age"
+                    onChange={this.onChange}
+                    value={this.state.age}
+                    name="age"
                   />
                 </div>
               </div>
@@ -155,7 +179,7 @@ class Profile extends Component {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>
-                    <input
+                    <Form.Control
                       type="text"
                       className="form-control"
                       placeholder="Enter Bio"
@@ -173,7 +197,7 @@ class Profile extends Component {
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>
-                    <input
+                    <Form.Control
                       type="text"
                       className="form-control"
                       placeholder="Enter Academic Plan"
@@ -197,7 +221,7 @@ class Profile extends Component {
             </Col>
           </Row>
         </Container>
-      </form>
+      </Form>
     );
   }
 }

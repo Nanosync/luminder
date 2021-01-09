@@ -41,8 +41,21 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  User.findById(req.params.id)
-    .then((user) => res.json(user))
+  const uid = req.params.id;
+
+  if (!uid) {
+    res.status(400).json("empty");
+    return;
+  }
+
+  User.findOne({"uid": uid})
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({"result": "no user"});
+        return;
+      }
+      res.json(user)
+    })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -73,10 +86,11 @@ router.route("/update/:id").post((req, res) => {
       user.likes = req.body.likes;
       user.dislikes = req.body.dislikes;
       user.profilePhoto = req.body.profilePhoto;
+      user.age = req.body.age;
 
       user
         .save()
-        .then(() => res.json("User updated!"))
+        .then(() => res.json({ "result": "User updated!" }))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));

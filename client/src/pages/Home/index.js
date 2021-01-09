@@ -9,26 +9,26 @@ import './Home.css';
 import API from "../../api";
 
 const sendAction = (uid, targetUid, action) => {
-  API.post("swipe", { "uid": uid, "targetUid": targetUid, "action": action })
+  API.post("cards/swipe", { "uid": uid, "targetUid": targetUid, "action": action })
   .then(res => {
     console.log(res.data);
   })
   .catch(err => console.log(err));
 }
 
-const handleNo = (e, { uid, targetUid }) => {
-  sendAction(uid, targetUid, "dislike");
-};
-
-const handleYes = (e, { uid, targetUid }) => {
-  sendAction(uid, targetUid, "like");
-};
-
 const Home = () => {
   const user = useContext(AuthUserContext);
   const history = useHistory();
   const [advertised, setAdvertised] = useState(false);
   const [cards, setCards] = useState([]);
+
+  const handleNo = (e, targetUid) => {
+    sendAction(user.uid, targetUid, "dislike");
+  };
+  
+  const handleYes = (e, targetUid) => {
+    sendAction(user.uid, targetUid, "like");
+  };
 
   useEffect(() => {
     if (!advertised && user && user.uid) {
@@ -66,8 +66,8 @@ const Home = () => {
     <Container className="flex-grow-1 d-flex">
       <Row className="align-self-center">
         <Col xs={12} sm className="mt-2">
-          <ProfileCard name={cards[0].name} age={cards[0].age} />
-          <ActionButton onClickNo={(e) => handleNo(e, user.uid, cards[0].uid)} onClickYes={(e) => handleYes(e, user.uid, cards[0].uid)} />
+          <ProfileCard name={cards[0].name} age={cards[0].age} photos={cards[0].photos} />
+          <ActionButton onClickNo={(e) => handleNo(e, cards[0].uid)} onClickYes={(e) => handleYes(e, cards[0].uid)} />
         </Col>
         <Col className="d-none d-md-block">
           <ProfileDetailCard header="Bio" text={cards[0].bio} />

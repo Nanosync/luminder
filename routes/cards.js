@@ -1,7 +1,8 @@
 const router = require('express').Router();
 let Cards = require('../models/cards.model');
-let SwipedCards = require('../models/swipedCards.model');
+let SwipedCard = require('../models/swipedCards.model');
 let User = require('../models/user.model');
+let Chat = require('../models/chats.model');
 
 router.route('/').get((req, res) => {
   const { uid } = req.query;
@@ -11,7 +12,7 @@ router.route('/').get((req, res) => {
     return;
   }
 
-  SwipedCards.find({ "uid" : uid })
+  SwipedCard.find({ "uid" : uid })
     .then(swipedCards => {
       if (!swipedCards) {
         res.status(400).json('error');
@@ -74,22 +75,60 @@ router.route('/swipe').post((req, res) => {
     return;
   }
 
-  const newSwipedCard = new SwipedCards({uid, targetUid, action});
-
-  SwipedCards.exists({ uid: uid, targetUid: targetUid })
+  SwipedCard.exists({ uid: uid, targetUid: targetUid })
   .then(exists => {
     if (exists) {
       console.log(`${uid} already swiped ${targetUid}!`);
       res.status(400).json({ "error": "swiped user already"});
     } else {
+      const newSwipedCard = new SwipedCard({uid, targetUid, action});
       newSwipedCard.save()
-      .then(() => res.json({ result: 'ok' }))
+      //.then(() => res.json({ result: 'ok' }))
       .catch(err => res.status(400).json('Error: ' + err));
     }
   })
   .catch(err => {
     res.status(400).json('Error: ' + err);
     console.log(err);
+    return;
+  });
+
+  SwipedCard.exists({ uid: targetUid, targetUid: uid, action: "like" })
+  .then(exists => {
+    if (exists) {
+      console.log(`matched ${uid} with ${targetUid}`)
+      // its a match
+      const recipients = [uid, targetUid];
+
+      const newChat = new Chat({recipients});
+      newChat.save()
+        //.then(() => res.json({result: "matched"}))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+      User.findOne({ "uid": uid })
+      .then(user => {
+        if (!user) {
+          return;
+        }
+        
+        user.chats = [...user.chats, newChat.id];
+        user.save();
+      });
+
+      User.findOne({ "uid": targetUid })
+      .then(user => {
+        if (!user) {
+          return;
+        }
+        
+        user.chats = [...user.chats, newChat.id];
+        user.save();
+      });
+
+      res.json({result: "matched"});
+    } else {
+      res.json({result: "ok"});
+    }
   });
 });
 
