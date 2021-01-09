@@ -1,11 +1,9 @@
-import React, { useContext, Component } from "react";
-import UserPhoto1 from "../../components/unsplash-1.jpg";
-import { Container, Row, Col, Button, Image, Card } from "react-bootstrap";
+import React, { Component } from "react";
+import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import ProfileDetailCard from "../../components/ProfileDetailCard";
 import ProfileImageCard from "../../components/ProfileImageCard";
 import AddPhoto from "../../components/AddPhoto";
 import { AuthUserContext } from "../../components/Session";
-import axios from "axios";
 import API from "../../api";
 import { Link } from "react-router-dom";
 

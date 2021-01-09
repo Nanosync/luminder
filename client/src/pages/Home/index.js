@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ProfileCard from '../../components/ProfileCard';
 import ActionButton from '../../components/ActionButton';
 import ProfileDetailCard from '../../components/ProfileDetailCard';
