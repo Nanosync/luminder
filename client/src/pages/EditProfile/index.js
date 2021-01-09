@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import UserPhoto1 from "../../components/unsplash-1.jpg";
 import { Container, Row, Col, Button, Image, Form } from "react-bootstrap";
-import ProfileDetailCard from "../../components/ProfileDetailCard";
 import ProfileImageCard from "../../components/ProfileImageCard";
 import { AuthUserContext } from "../../components/Session";
 import API from "../../api";

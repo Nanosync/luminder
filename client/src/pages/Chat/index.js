@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   uid: "",
   name: "",
   newText: "",
+  fetchedData: false
 };
 
 class Chat extends Component {
@@ -67,6 +68,10 @@ class Chat extends Component {
     const uid = user.uid;
     const query = "users/getchat/" + uid;
 
+    this.setState({
+      fetchedData: true,
+    })
+
     API.get(query)
       .then((response) => {
         this.setState({
@@ -87,6 +92,12 @@ class Chat extends Component {
         uid: user.uid,
         name: user.name,
       });
+      this.fetchData();
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.state.fetchedData && this.context) {
       this.fetchData();
     }
   }

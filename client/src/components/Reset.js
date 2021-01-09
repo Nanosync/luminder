@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Logo from "../logo.png";
 import "./Login.css";
 import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { withFirebase } from "./Firebase";
 
 const PasswordForgetPage = () => (
