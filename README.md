@@ -1,6 +1,8 @@
 # LuminDER
 
-LuminDER is a dating app for NUS students that takes on the familiar interface of LumiNUS and is a wordplay on Tinder.
+![LuminDER](docs/luminder_2.png "LuminDER")
+
+**LuminDER** is a dating app for NUS students that takes on the familiar interface of LumiNUS and is a wordplay on Tinder.
 
 ## About
 This project was created by a 4-member team during [Hack&Roll 2021](https://hacknroll2021.devpost.com/) hackathon organised by [NUS Hackers](https://nushackers.org/). You may view our submission [here](https://devpost.com/software/luminder).
@@ -11,6 +13,17 @@ npm start
 cd client
 npm start
 ```
+
+## Screenshots
+
+### Login
+![login](docs/luminder_1.png "Login")
+
+### Profile
+![profile](docs/luminder_3.png "Profile")
+
+### Chat
+![chat](docs/luminder_4.png "Chat")
 
 ## How we built it
 

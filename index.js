@@ -9,13 +9,13 @@ const app = express();
 app.use(morgan('dev'));
 const port = process.env.PORT || 5000;
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+const uri = process.env.ATLAS_URI || 'mongodb://127.0.0.1:27017/luminder';
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
-})
+});
 
 app.use(cors());
 app.use(express.json());
